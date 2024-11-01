@@ -11,27 +11,33 @@ class CargaNotas:
         self.mostrar_informacion()
 
     def cargar_alumnos(self):
-        nAlumnos = int(input("Ingrese la cantidad de alumnos: "))
-        for _ in range(nAlumnos):
+        while True:
+            
+                
             nombre = input("Ingrese el nombre completo del alumno: ")
             legajo = int(input("Ingrese el legajo: "))
             alumno = Alumno(nombre, legajo)
             self.cargar_notas(alumno)
             self.alumnos.append(alumno)
+            respuesta=input("Deseas cargar mas alumnos? (1.SI / 2.NO): ")
+            if respuesta=="2":
+                break
+        
+        
+                
+                
+       
 
     def cargar_notas(self, alumno):
-        nNotas = int(input("Ingrese la cantidad de notas: "))
-        if nNotas < 0:
-            print("Debe ingresar al menos una nota")
-            self.cargar_notas(alumno)
-            return
-        for _ in range(nNotas):
+        while True:
+            
             catedra = input("Ingrese la catedra: ")
-            notaExamen = float(
-                input(f"Ingrese la nota del alumno {alumno.nombreCompleto}: ")
-            )
+            notaExamen = float(input(f"Ingrese la nota del alumno {alumno.nombreCompleto}: "))
             nota = Nota(catedra, notaExamen)
             alumno.cargar_notas(nota)
+            respuesta=input("Deseas cargar mas notas? (1.SI / 2.NO): ")
+            if respuesta=="2":
+                break
 
     def mostrar_informacion(self):
 

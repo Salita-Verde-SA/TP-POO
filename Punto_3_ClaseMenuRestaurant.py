@@ -11,8 +11,8 @@ class MenuRestaurant:
         self.mostrar_informacion()
 
     def cargar_platos(self):
-        nPlatos = int(input("Ingrese la cantidad de platos a cargar: "))
-        for _ in range(nPlatos):
+        
+        while True:
             nombre = input("Ingrese el nombre del plato: ")
             precio = float(input("Ingrese el precio: "))
             esBebida = input("Es una bebida?: (1.SI / 2.NO)")
@@ -30,24 +30,32 @@ class MenuRestaurant:
                 self.cargar_ingredientes(plato)
 
             self.platosMenu.append(plato)
+            respuesta=input("Quiere ingresar otro plato? (1.SI / 2.NO): ")
+            if respuesta=="2":
+                break
 
     def cargar_ingredientes(self, plato):
-        nIngredientes = int(input("Ingrese la cantidad de ingredientes: "))
-        if nIngredientes <= 0:
-            print("Ingrese por lo menos un ingrediente.")
-            self.cargar_ingredientes(plato)
-            return
-        for _ in range(nIngredientes):
+        #if nIngredientes <= 0:
+         #   print("Ingrese por lo menos un ingrediente.")
+          #  self.cargar_ingredientes(plato)
+           # return
             print(f"Plato: {plato.nombreCompleto}")
             if plato.esBebida == True:
                 print("El plato es una bebida y no lleva ingredientes.")
             elif plato.esBebida == False:
-
-                nombre = input("Ingrese el nombre del ingrediente: ")
-                cantidad = float(input("Ingrese la cantidad: "))
-                unidadDeMedida = input("Ingrese la unidad de medida: ")
-                ingrediente = Ingredientes(nombre, cantidad, unidadDeMedida)
-                plato.cargar_lista_ingredientes(ingrediente)
+                while True:
+                    nombre = input("Ingrese el nombre del ingrediente: ")
+                    if nombre=="":
+                        print("Ingrese por lo menos un ingrediente.")
+                        self.cargar_ingredientes(plato)
+                        return
+                    cantidad = float(input("Ingrese la cantidad: "))
+                    unidadDeMedida = input("Ingrese la unidad de medida: ")
+                    ingrediente = Ingredientes(nombre, cantidad, unidadDeMedida)
+                    plato.cargar_lista_ingredientes(ingrediente)
+                    respuesta=input("Quiere ingresar otro ingrediente? (1.SI / 2.NO): ")
+                    if respuesta=="2":
+                        break
 
     def mostrar_informacion(self):
         print("-----------MENÚ-----------")
