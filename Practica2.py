@@ -13,11 +13,13 @@ class Alumno:
         total = sum(nota.notaExamen for nota in self.notas)
         return total / len(self.notas)
 
+
 class Nota:
     def __init__(self, catedra, notaExamen):
         self.catedra = catedra
         self.notaExamen = notaExamen
-        
+
+
 class CargaNotas:
     def __init__(self):
         self.alumnos = []
@@ -32,7 +34,9 @@ class CargaNotas:
             self.alumnos.append(alumno)
 
     def cargar_notas(self, alumno):
-        n_notas = int(input(f"Ingrese la cantidad de notas para {alumno.nombreCompleto}: "))
+        n_notas = int(
+            input(f"Ingrese la cantidad de notas para {alumno.nombreCompleto}: ")
+        )
         if n_notas < 1:
             print("Debe ingresar al menos una nota.")
             self.cargar_notas(alumno)
@@ -55,7 +59,7 @@ class CargaNotas:
         self.cargar_alumnos()
         self.mostrar_informacion()
 
+
 if __name__ == "__main__":
     carga_notas = CargaNotas()
     carga_notas.main()
-
